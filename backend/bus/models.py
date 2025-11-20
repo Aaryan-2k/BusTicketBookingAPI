@@ -8,8 +8,12 @@ class Bus(models.Model):
     start_time=models.DateTimeField()
     reach_time=models.DateTimeField()
     number_of_seats=models.PositiveIntegerField()
+    has_ac=models.BooleanField(default=False)
+    has_chargingport=models.BooleanField(default=False)
+    has_wifi=models.BooleanField(default=False)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
+    min_price=models.FloatField()
 
     def __str__(self):
         return self.name
