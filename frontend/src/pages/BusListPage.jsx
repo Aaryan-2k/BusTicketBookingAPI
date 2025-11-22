@@ -5,7 +5,6 @@ import axios from "axios";
 import {useState, useEffect} from "react"; 
 
 export default function BusListPage() {
-
     const [buses, setBuses] = useState([]);
     useEffect(() => {
         fetchBuses();
@@ -18,7 +17,7 @@ export default function BusListPage() {
     }
 
     return ( 
-    <div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+    <div className="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
         <NavBar />
         <main className="flex flex-1 justify-center py-5 px-4 sm:px-6 md:px-8">
             <div className="layout-content-container flex flex-col w-full max-w-5xl flex-1">

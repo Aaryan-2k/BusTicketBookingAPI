@@ -19,7 +19,20 @@ class Bus(models.Model):
         return self.name
 
 class Seat(models.Model):
-    bus=models.ForeignKey(Bus, on_delete=models.CASCADE)
+    bus=models.ForeignKey(Bus, on_delete=models.CASCADE, related_name='seats')
     number=models.CharField(max_length=10)
     price=models.FloatField()
     is_booked=models.BooleanField(default=False)
+
+class BookingDetail(models.Model):
+    phone_number=models.CharField(max_length=20)
+    email=models.EmailField()
+    bus=models.ForeignKey(Bus,on_delete=models.CASCADE)
+    total_amount=models.FloatField()
+
+class Passenger(models.Model):
+    booking=models.ForeignKey(BookingDetail,on_delete=models.CASCADE)
+    name=models.CharField(max_length=250)
+    age=models.PositiveIntegerField()
+    seat=models.OneToOneField(Seat,on_delete=models.CASCADE)
+    

@@ -43,15 +43,24 @@ class SeatBookingSerializer(serializers.ModelSerializer):
 
 class CreateBusSerializer(serializers.ModelSerializer):
     available_seats = serializers.SerializerMethodField(read_only=True)
-    
-
     class Meta:
         model=Bus
-        fields=['name','number_plate','origin','destination','start_time','reach_time','number_of_seats', 'has_ac','has_chargingport','has_wifi','min_price', 'available_seats']
+        fields=['id','name','number_plate','origin','destination','start_time','reach_time','number_of_seats', 'has_ac','has_chargingport','has_wifi','min_price', 'available_seats']
 
     def get_available_seats(self, obj):
         return Seat.objects.filter(bus=obj, is_booked=False).count()
 
+
+class SeatSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Seat
+        fields = ['id', 'number', 'price', 'is_booked']
+
+class DetailBusSerializer(serializers.ModelSerializer):
+    seats = SeatSerializer(many=True, read_only=True)
+    class Meta:
+        model = Bus
+        fields = ['id', 'name', 'number_plate', 'origin', 'destination', 'start_time', 'reach_time', 'number_of_seats', 'has_ac', 'has_chargingport', 'has_wifi', 'min_price', 'seats']
 
 
 

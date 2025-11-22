@@ -21,3 +21,19 @@ export function formatTimeRangeWithDuration(start,end) {
     const endTimeStr = timeFormatter.format(endDate);
     return `${startTimeStr} → ${endTimeStr} ${durationStr}`;
 }
+
+export default function formatIsoToCustomDate(isoString) {
+    const date = new Date(isoString);
+
+    const months = [
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+    const day = date.getDate();
+    const monthIndex = date.getMonth();
+    const year = date.getFullYear();
+    let hours = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+
+    return `${day} ${months[monthIndex]} ${year}, ${hours}:${minutes}`;
+}
